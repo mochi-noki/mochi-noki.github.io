@@ -11,9 +11,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body class="with-sections">
 <header class="site"><div><a class="brand" href="./">모찌 노키</a><a href="releases.html">업데이트 소식</a><a href="support.html">도움말</a><a href="privacy.html">개인정보 처리방침</a><a href="en/" lang="en">English</a></div></header>
-<nav class="toc" aria-label="목차"><div>
+<nav class="sections" aria-label="목차"><div>
   <a href="#friends">친구들</a><a href="#seasonal">계절 친구</a><a href="#feelings">표정</a><a href="#mac">맥 반응</a><a href="#care">하루 챙기기</a><a href="#theme">화면 모드</a>
   <a href="#habits">습관</a><a href="#schedule">일정</a><a href="#calendar">맥 캘린더</a><a href="#growth">성장</a>
   <a href="#collect">퀘스트·업적</a><a href="#play">놀이</a><a href="#closet">옷장</a><a href="#settings">설정</a><a href="#install">만나는 법</a>
@@ -315,6 +315,34 @@
       });
     });
   })();
+</script><script>
+(() => {
+  const bar = document.querySelector('.sections');
+  if (!bar) return;
+  const row = bar.firstElementChild;
+  const links = [...bar.querySelectorAll('a[href^="#"]')];
+  const targets = links.map(a => document.getElementById(decodeURIComponent(a.hash.slice(1))));
+  let current = null, queued = false;
+  const update = () => {
+    queued = false;
+    const line = bar.getBoundingClientRect().bottom + 24;
+    let index = -1;
+    targets.forEach((t, i) => { if (t && t.getBoundingClientRect().top <= line) index = i; });
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) index = targets.length - 1;
+    const link = links[index] || null;
+    if (link === current) return;
+    if (current) current.removeAttribute('aria-current');
+    current = link;
+    if (!link) return;
+    link.setAttribute('aria-current', 'location');
+    const offset = link.getBoundingClientRect().left - row.getBoundingClientRect().left;
+    row.scrollTo({ left: row.scrollLeft + offset - (row.clientWidth - link.offsetWidth) / 2, behavior: 'smooth' });
+  };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+  addEventListener('scroll', queue, { passive: true });
+  addEventListener('resize', queue);
+  update();
+})();
 </script>
 </body>
 </html>

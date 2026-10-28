@@ -88,7 +88,10 @@
   .site .brand { font: 20px/1 var(--display); color: var(--ink); text-decoration: none; margin-right: auto; }
   .site a { color: var(--soft); text-decoration: none; font-size: 14px; }
   .site a[aria-current="page"] { color: var(--pink); }
-  .site + nav { top: 49px; }
+  /* The intro's section tabs stay at the top while the site header scrolls away (two bars eat a phone screen). */
+  .with-sections .site { position: static; }
+  .sections { top: 0; }
+  .sections a[aria-current] { background: var(--pink-bg); border-color: var(--pink); }
   .doc { gap: 28px; }
   .doc section { gap: 10px; }
   .doc h2 { font-size: 22px; }
