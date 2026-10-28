@@ -88,6 +88,22 @@
   .site .brand { font: 20px/1 var(--display); color: var(--ink); text-decoration: none; margin-right: auto; }
   .site a { color: var(--soft); text-decoration: none; font-size: 14px; }
   .site a[aria-current="page"] { color: var(--pink); }
+  .langs { position: relative; }
+  .langs summary { list-style: none; cursor: pointer; color: var(--soft); font-size: 14px; }
+  .langs summary::-webkit-details-marker { display: none; }
+  .langs[open] summary { color: var(--pink); }
+  .langs ul { position: absolute; right: 0; top: calc(100% + 8px); z-index: 7; margin: 0; padding: 6px; list-style: none; min-width: 170px;
+              background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 12px 30px rgba(0, 0, 0, .12); }
+  .langs li a { display: block; padding: 6px 10px; border-radius: 8px; color: var(--ink); font-size: 14px; }
+  .langs li a[aria-current] { background: var(--pink-bg); }
+  .friends-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 0 4px; padding: 18px 8px 6px; border-radius: 28px;
+                 background: linear-gradient(135deg, var(--sky-bg), var(--pink-bg) 55%, var(--butter-bg)); }
+  .friends-row img { width: min(180px, 30%); height: auto; }
+  .prevails { font-size: 14px; background: var(--pink-bg); border-radius: 14px; padding: 12px 16px; max-width: none; }
+  :lang(ja), :lang(zh-Hans), :lang(zh-Hant) { word-break: normal; line-break: strict; }
+  :lang(ja) { --display: "Hiragino Maru Gothic ProN", "Hiragino Sans", system-ui, sans-serif; --body: "Hiragino Sans", system-ui, sans-serif; }
+  :lang(zh-Hans) { --display: "PingFang SC", system-ui, sans-serif; --body: "PingFang SC", system-ui, sans-serif; }
+  :lang(zh-Hant) { --display: "PingFang TC", system-ui, sans-serif; --body: "PingFang TC", system-ui, sans-serif; }
   /* The intro's section tabs stay at the top while the site header scrolls away (two bars eat a phone screen). */
   .with-sections .site { position: static; }
   .sections { top: 0; }
