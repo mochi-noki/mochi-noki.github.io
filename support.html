@@ -53,6 +53,24 @@
       });
     });
   })();
+</script><script>
+(() => {
+  const menu = document.querySelector('.langs');
+  if (!menu) return;
+  const list = menu.querySelector('ul');
+  const place = () => {
+    list.style.left = list.style.right = '';
+    const button = menu.getBoundingClientRect();
+    const width = list.offsetWidth;
+    if (button.right - width < 8) { list.style.left = '0'; list.style.right = 'auto'; }
+    list.style.maxHeight = Math.max(160, innerHeight - button.bottom - 24) + 'px';
+  };
+  menu.addEventListener('toggle', () => { if (menu.open) place(); });
+  document.addEventListener('click', e => { if (menu.open && !menu.contains(e.target)) menu.open = false; });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); }
+  });
+})();
 </script>
 </body>
 </html>

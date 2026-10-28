@@ -93,6 +93,7 @@
   .langs summary::-webkit-details-marker { display: none; }
   .langs[open] summary { color: var(--pink); }
   .langs ul { position: absolute; right: 0; top: calc(100% + 8px); z-index: 7; margin: 0; padding: 6px; list-style: none; min-width: 170px;
+              max-height: calc(100vh - 80px); overflow-y: auto; overscroll-behavior: contain;
               background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 12px 30px rgba(0, 0, 0, .12); }
   .langs li a { display: block; padding: 6px 10px; border-radius: 8px; color: var(--ink); font-size: 14px; }
   .langs li a[aria-current] { background: var(--pink-bg); }
@@ -105,7 +106,8 @@
   :lang(zh-Hans) { --display: "PingFang SC", system-ui, sans-serif; --body: "PingFang SC", system-ui, sans-serif; }
   :lang(zh-Hant) { --display: "PingFang TC", system-ui, sans-serif; --body: "PingFang TC", system-ui, sans-serif; }
   /* The intro's section tabs stay at the top while the site header scrolls away (two bars eat a phone screen). */
-  .with-sections .site { position: static; }
+  /* Relative, not static: the header (and its language menu) stays above the sticky tabs while it's on screen. */
+  .with-sections .site { position: relative; }
   .sections { top: 0; }
   .sections a[aria-current] { background: var(--pink-bg); border-color: var(--pink); }
   .doc { gap: 28px; }
